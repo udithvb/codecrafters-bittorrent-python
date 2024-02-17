@@ -14,6 +14,11 @@ def decode_bencode(bencoded_value):
         if first_colon_index == -1:
             raise ValueError("Invalid encoded value")
         return bencoded_value[first_colon_index+1:]
+    elif chr(bencoded_value[0]) == "i" and chr(bencoded_value[-1]) == "e":
+
+        bencoded_value = str(bencoded_value)
+        extract_int = bencoded_value[3:-2]
+        return int(extract_int)
     else:
         raise NotImplementedError("Only strings are supported at the moment")
 
